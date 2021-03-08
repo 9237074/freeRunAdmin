@@ -5,7 +5,7 @@ export default [
     title: '学生管理',
     icon: 'folder-o',
     children: [
-      { path: '/stuData', title: '学生信息管理' },
+      { path: '/stuData', title: '学生信息管理' }
       // { path: '/erroData', title: '学生异常信息' }
     ]
   },

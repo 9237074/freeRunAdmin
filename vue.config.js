@@ -18,12 +18,9 @@ module.exports = {
     // publicPath // 和 publicPath 保持一致
     proxy: {
       '/api': {
-        target: 'https://ydlp.xysbs.cn:443', // 'http://120.78.210.102:8080',
-        ws: true,
+        target: 'http://localhost:4000',
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
+        pathRewrite: { '^/api': '' }
       }
     }
   },
@@ -53,7 +50,7 @@ module.exports = {
       // 开发环境
       .when(process.env.NODE_ENV === 'development',
         // sourcemap不包含列信息
-        config => config.devtool('cheap-source-map')
+        config => config.devtool('source-map')
       )
       // TRAVIS 构建 vue-loader 添加 filename
       .when(process.env.VUE_APP_BUILD_MODE === 'TRAVIS' || process.env.NODE_ENV === 'development',

@@ -2,143 +2,175 @@
   <d2-container>
     <div class="headerOne">
       <a href="#" style="">规则配置</a>
-		</div>
-		<div class="headerTwo">
-            <div class="block">
-    <span class="demonstration">本学期时段：&nbsp;</span>
-    <el-date-picker
-      v-model="value1"
-      type="daterange"
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :change="btn1()"
-      readonly
-      >
-    </el-date-picker>
-  </div>
-		</div>
-		<div class="subject">
-    <div class="subject-headerOne">学期合格标准</div>
-    <table class="tableOne">
-      <tr>
-      <th style="width: 150px;"></th>
-      <th>男生</th>
-      <th>女生</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">规则时间:</th>
-      <th>2019-03-14至2019-07-05</th>
-      <th>2019-03-14至2019-07-05</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">总次数:</th>
-      <th>{{ manrule.runTimes }}次</th>
-      <th>{{ womanrule.runTimes }}次</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">总晨跑次数:</th>
-      <th>{{manrule.minMileage}}次</th>
-      <th>{{womanrule.minMileage}}次</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">最小里程:</th>
-      <th>{{manrule.minMileage}}.00km</th>
-      <th>{{womanrule.minMileage}}.00km</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">最大里程:</th>
-      <th>{{manrule.maxMileage}}.00km</th>
-      <th>{{womanrule.maxMileage}}.00km</th>
-      </tr>
-      <tr>
-      <th style="width: 150px;">单日标准:</th>
-      <th>
-              <el-button type="text" @click="dialogVisible = true">查看详情</el-button>
+    </div>
+    <div class="headerTwo">
+      <div class="block">
+        <span class="demonstration">本学期时段：&nbsp;</span>
+        <el-date-picker
+          v-model="value1"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :change="btn1()"
+          readonly
+        >
+        </el-date-picker>
+      </div>
+    </div>
+    <div class="subject">
+      <div class="subject-headerOne">学期合格标准</div>
+      <table class="tableOne">
+        <tr>
+          <th style="width: 150px"></th>
+          <th>男生</th>
+          <th>女生</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">规则时间:</th>
+          <th>2019-03-14至2019-07-05</th>
+          <th>2019-03-14至2019-07-05</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">总次数:</th>
+          <th>{{ manrule.runTimes }}次</th>
+          <th>{{ womanrule.runTimes }}次</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">总晨跑次数:</th>
+          <th>{{ manrule.minMileage }}次</th>
+          <th>{{ womanrule.minMileage }}次</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">最小里程:</th>
+          <th>{{ manrule.minMileage }}.00km</th>
+          <th>{{ womanrule.minMileage }}.00km</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">最大里程:</th>
+          <th>{{ manrule.maxMileage }}.00km</th>
+          <th>{{ womanrule.maxMileage }}.00km</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">单日标准:</th>
+          <th>
+            <el-button type="text" @click="dialogVisible = true"
+              >查看详情</el-button
+            >
             <el-dialog
               title="每日规则"
               :visible.sync="dialogVisible"
               width="30%"
-              >
-              <span>{{manrule.dayRule}}}</span>
+            >
+              <span>{{ manrule.dayRule }}}</span>
               <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="dialogVisible = false"
+                  >确 定</el-button
+                >
               </span>
             </el-dialog>
           </th>
           <th>
-              <el-button type="text" @click="dialogVisible = true">查看详情</el-button>
+            <el-button type="text" @click="dialogVisible = true"
+              >查看详情</el-button
+            >
             <el-dialog
               title="每日规则"
               :visible.sync="dialogVisible"
               width="30%"
-              >
-              <span>{{womanrule.dayRule}}</span>
+            >
+              <span>{{ womanrule.dayRule }}</span>
               <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="dialogVisible = false"
+                  >确 定</el-button
+                >
               </span>
             </el-dialog>
-          </th>
-          </tr>
-    </table>
-    <div class="subject-headerOne">其他设置</div>
-    <table class="tableTwo">
-          <tr>
-          <th style="width: 150px;">打卡点数:</th>
-          <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="manrule.punchPoints" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          个
-          </th>
-          </tr>
-          <tr>
-          <th style="width: 150px;">可打卡范围:</th>
-          <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="manrule.range" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          米
-          </th>
-          </tr>
-          <tr>
-          <th style="width: 150px;">更新打卡点的最小移动距离:</th>
-          <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="manrule.mini" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          米
-          </th>
-          </tr>
-          <tr>
-          <th style="width: 150px;">分配打卡点的最小距离:</th>
-          <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="input" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          米
           </th>
         </tr>
-          <tr>
-          <th style="width: 150px;">打卡点分配距离1:</th>
+      </table>
+      <div class="subject-headerOne">其他设置</div>
+      <table class="tableTwo">
+        <tr>
+          <th style="width: 150px">打卡点数:</th>
           <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="input" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          公里
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="manrule.punchPoints"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            个
           </th>
-          </tr>
-          <tr>
-          <th style="width: 150px;">打卡点分配距离2:</th>
+        </tr>
+        <tr>
+          <th style="width: 150px">可打卡范围:</th>
           <th>
-          <span style="display: inline-block;width: 200px;">
-          <el-input v-model="input" :disabled="true" placeholder="请输入内容"></el-input>
-          </span>
-          公里
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="manrule.range"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            米
           </th>
-          </tr>
-    </table>
-		</div>
+        </tr>
+        <tr>
+          <th style="width: 150px">更新打卡点的最小移动距离:</th>
+          <th>
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="manrule.mini"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            米
+          </th>
+        </tr>
+        <tr>
+          <th style="width: 150px">分配打卡点的最小距离:</th>
+          <th>
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="input"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            米
+          </th>
+        </tr>
+        <tr>
+          <th style="width: 150px">打卡点分配距离1:</th>
+          <th>
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="input"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            公里
+          </th>
+        </tr>
+        <tr>
+          <th style="width: 150px">打卡点分配距离2:</th>
+          <th>
+            <span style="display: inline-block; width: 200px">
+              <el-input
+                v-model="input"
+                :disabled="true"
+                placeholder="请输入内容"
+              ></el-input>
+            </span>
+            公里
+          </th>
+        </tr>
+      </table>
+    </div>
   </d2-container>
 </template>
 
@@ -175,12 +207,12 @@ export default {
   },
   created: function () {
     runrule({})
-      .then(response => {
+      .then((response) => {
         console.log(response.msg[0][0])
         this.manrule = response.msg[0][0]
         this.womanrule = response.msg[1][0]
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err)
       })
   },
@@ -192,7 +224,6 @@ export default {
 }
 </script>
 <style>
-
 .headerOne {
   height: 50px;
   border-bottom: 1px solid #ccc;
@@ -203,12 +234,12 @@ export default {
   line-height: 84px;
   width: 160px;
   text-align: center;
-  text-decoration:none;
+  text-decoration: none;
   color: #000;
 }
 .tableOne a {
-  text-decoration:none;
-  color:#000;
+  text-decoration: none;
+  color: #000;
 }
 .headerOne > a:first-child {
   margin-left: 20px;
@@ -216,12 +247,12 @@ export default {
 }
 .headerTwo {
   height: 80px;
-  border-bottom: 1px solid #EBEEF5;
+  border-bottom: 1px solid #ebeef5;
   line-height: 80px;
 }
 .subject-headerOne {
   height: 30px;
-  background-color: #EBEEF5;
+  background-color: #ebeef5;
   margin-top: 10px;
   line-height: 30px;
 }
@@ -248,5 +279,4 @@ export default {
 #app {
   height: 1000px;
 }
-
 </style>
