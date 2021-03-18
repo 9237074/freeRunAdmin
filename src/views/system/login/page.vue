@@ -117,7 +117,7 @@
 <script>
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
-const appkey = require('../../../api/appkey')
+const appkey = require('@api/system/appkey')
 const crypto = require('crypto')
 
 export default {

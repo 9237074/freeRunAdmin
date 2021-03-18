@@ -1,5 +1,5 @@
 import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
+import { token } from '@api/system/token.js'
 
 export function readAddTheme (data, offset, change, theme, readTime, readDate, readSite, people) {
   return request({

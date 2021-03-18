@@ -1,5 +1,7 @@
 import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
+import { token } from '@api/system/token.js'
+
+// import token from '../../system/token'
 
 export function errData (data) {
   return request({

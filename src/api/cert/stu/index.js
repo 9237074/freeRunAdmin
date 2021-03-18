@@ -1,5 +1,5 @@
 import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
+import { token } from '@api/system/token.js'
 
 export function certStu (data) {
   return request({

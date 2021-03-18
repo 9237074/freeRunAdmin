@@ -17,10 +17,10 @@ module.exports = {
   devServer: {
     // publicPath // 和 publicPath 保持一致
     proxy: {
-      '/api': {
+      '/': {
         target: 'http://localhost:4000',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' }
+        pathRewrite: { '/': '' }
       }
     }
   },
