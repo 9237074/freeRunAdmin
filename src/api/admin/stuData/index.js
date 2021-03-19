@@ -1,10 +1,9 @@
-import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
+import request from '@/plugin/axios';
 
-export function stuData (data) {
+export default function stuData (data) {
   return request({
-    url: 'adminStuData?token=' + token + '&type=student',
-    method: 'get',
+    url: '/admin/system/stuData',
+    method: 'post',
     data
-  })
+  });
 }

@@ -1,6 +1,6 @@
 <template>
   <d2-container class="page">
-    阳光学院软件技术研发中心&Underdog工作室
+    freeRun
   </d2-container>
 </template>
 

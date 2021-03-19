@@ -4,14 +4,14 @@ import { Message } from 'element-ui'
 import util from '@/libs/util'
 
 // 创建一个错误
-function errorCreate(msg) {
+function errorCreate (msg) {
   const error = new Error(msg)
   errorLog(error)
   throw error
 }
 
 // 记录和显示错误
-function errorLog(error) {
+function errorLog (error) {
   // 添加到日志
   store.dispatch('d2admin/log/push', {
     message: '数据请求异常',
@@ -72,16 +72,22 @@ service.interceptors.response.use(
         case 200:
           // [ 示例 ] code === 0 代表没有错误
           return dataAxios.data
-        case 4001:
+        case 40001:
           // 参数不完整
           return dataAxios.msg
-        case 4002:
+        case 40002:
           // 参数不符合要求
+          // 显示提示
+          Message({
+            message: dataAxios.msg,
+            type: 'error',
+            duration: 5 * 1000
+          })
           return dataAxios.msg
-        case 5000:
+        case 50000:
           // 参数不完整
           return dataAxios.msg
-        case 5001:
+        case 50001:
           // 数据库异常
           return dataAxios.msg
         case 'xxx':

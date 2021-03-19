@@ -1,10 +1,9 @@
 import request from '@/plugin/axios'
-import { token } from '@api/system/token.js'
 
-export function readData (data) {
+export default function readData (data) {
   return request({
-    url: 'adminreaddata?token=' + token,
-    method: 'get',
+    url: '/admin/read/readdata',
+    method: 'post',
     data
   })
 }

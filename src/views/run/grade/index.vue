@@ -6,7 +6,7 @@
       </el-input>
     </div>
     <div style="display: inline-block; margin-left: 20px">
-      <el-input placeholder="请输入院系" v-model="Department">
+      <el-input placeholder="请输入院系" v-model="department">
         <template slot="prepend">院系</template>
       </el-input>
     </div>
@@ -34,21 +34,15 @@
     <el-table :data="tableData" stripe style="height: 550px">
       <el-table-column prop="name" label="姓名" width="90"> </el-table-column>
       <el-table-column prop="uid" label="学号" width="100"> </el-table-column>
-      <el-table-column prop="Rs.Department" label="学院" width="130">
+      <el-table-column prop="Rs.department" label="学院" width="130">
       </el-table-column>
       <el-table-column prop="runTimes" label="跑步次数" width="90">
       </el-table-column>
-      <el-table-column prop="punch" label="签到次数" width="90">
-      </el-table-column>
       <el-table-column prop="mileage" label="里程" width="90">
       </el-table-column>
-      <el-table-column prop="morningTimes" label="晨跑次数" width="100">
+      <el-table-column prop="duration" label="时长" width="100">
       </el-table-column>
-      <el-table-column prop="morningmileage" label="晨跑里程" width="100">
-      </el-table-column>
-      <el-table-column prop="duration" label="duration" width="100">
-      </el-table-column>
-      <el-table-column prop="fraction" label="fraction" width="100">
+      <el-table-column prop="fraction" label="分数" width="100">
       </el-table-column>
     </el-table>
     <div style="margin-top: 20px">
@@ -67,69 +61,59 @@
 </template>
 
 <script>
-import { conditionalQuery } from '@/api/conditionalQuery/conditionalQuery'
+import getRunGrade from '@api/run/grade';
 export default {
   name: 'record',
   data () {
     return {
       stuId: null,
-      Department: null,
+      department: null,
       page: 0,
       tableData: [
         {
           studentId: '',
           name: '',
           gender: '',
-          Department: '',
+          department: '',
           profession: '',
           grade: ''
         }
       ],
       length: null,
       switchDate: null
-    }
+    };
   },
   mounted: function () {
-    this.search()
+    getRunGrade({
+      offset: 0
+    }).then((res) => {
+      this.tableData = res.data;
+      this.length = res.count;
+    });
   },
   methods: {
     reset () {
-      this.stuId = null
-      this.Department = null
-      this.switchDate = null
-      this.search()
+      this.stuId = null;
+      this.department = null;
+      this.switchDate = null;
+      this.search();
     },
     search () {
-      let data = {}
-      if (this.switchDate == null) {
-        data.startTime = '2000-01-01'
-      } else {
-        data.startTime = this.switchDate[0]
-      }
-      if (this.switchDate == null) {
-        data.endTime = '9999-01-01'
-      } else {
-        data.endTime = this.switchDate[1]
-      }
-      data.page = this.page
-      data.table = 'rungrade'
-      data.stuId = this.stuId
-      data.department = this.Department
-
-      conditionalQuery(data).then((res) => {
-        console.log(res)
-        this.tableData = res.data
-        this.length = res.length
-      })
+      getRunGrade({
+        offset: 0
+      }).then((res) => {
+        this.tableData = res.data;
+        this.length = res.count;
+      });
     },
     currentChange (e) {
-      console.log('page:', e)
-      this.page = e - 1
-      console.log('page1:', this.page)
-      this.search()
+      console.log('page:', e);
+      this.page = e - 1;
+      console.log('page1:', this.page);
+      this.search();
     }
   }
-}
+};
 </script>
 <style>
 .partitionLine {

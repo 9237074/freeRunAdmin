@@ -1,10 +1,9 @@
 import request from '@/plugin/axios'
-import { token } from '@api/system/token.js'
 
-export function readTheme (data, offset) {
+export default function readTheme (data) {
   return request({
-    url: 'adminreadTheme?token=' + token + '&type=student' + '&offset=' + offset,
-    method: 'get',
+    url: '/admin/read/readtheme',
+    method: 'post',
     data
   })
 }

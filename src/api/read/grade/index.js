@@ -1,10 +1,9 @@
 import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
 
-export function readGrade (data, status, offset) {
+export default function readGrade (data) {
   return request({
-    url: 'adminreadGrade?token=' + token + '&type=student' + '&status=' + status + '&offset=' + offset,
-    method: 'get',
+    url: '/admin/read/readgrade',
+    method: 'post',
     data
   })
 }

@@ -80,7 +80,7 @@
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
               <span> <d2-icon name="question-circle" /> 忘记密码</span>
-              <span>注册用户</span>
+              <!-- <span>注册用户</span> -->
             </p>
             <!-- 快速登录按钮 -->
             <!-- <el-button class="page-login--quick" size="default" type="info" @click="dialogVisible = true">
@@ -96,30 +96,17 @@
           </p>
           <p class="page-login--content-footer-copyright">
             Copyright
-            <d2-icon name="copyright" /> 2019 <a href=""> freeRun</a>
+            <d2-icon name="copyright" /> 2021 <a href=""> freeRun</a>
           </p>
         </div>
       </div>
     </div>
-    <el-dialog title="快速选择用户" :visible.sync="dialogVisible" width="400px">
-      <el-row :gutter="10" style="margin: -20px 0px -10px 0px">
-        <el-col v-for="(user, index) in users" :key="index" :span="8">
-          <div class="page-login--quick-user" @click="handleUserBtnClick(user)">
-            <d2-icon name="user-circle-o" />
-            <span>{{ user.name }}</span>
-          </div>
-        </el-col>
-      </el-row>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
-const appkey = require('@api/system/appkey')
-const crypto = require('crypto')
-
 export default {
   data () {
     return {
@@ -127,27 +114,10 @@ export default {
       time: dayjs().format('HH:mm:ss'),
       // 快速选择用户
       dialogVisible: false,
-      users: [
-        {
-          name: '管理员',
-          username: 'admin',
-          password: 'admin'
-        },
-        {
-          name: '编辑',
-          username: 'editor',
-          password: 'editor'
-        },
-        {
-          name: '用户1',
-          username: 'user1',
-          password: 'user1'
-        }
-      ],
       // 表单
       formLogin: {
         username: 'admin',
-        password: '', // 'yango123',
+        password: 'asddsa12', // 'yango123',
         code: 'v9am'
       },
       // 校验
@@ -193,11 +163,11 @@ export default {
      * @description 接收选择一个用户快速登录的事件
      * @param {Object} user 用户信息
      */
-    handleUserBtnClick (user) {
-      this.formLogin.username = user.username
-      this.formLogin.password = user.password
-      this.submit()
-    },
+    // handleUserBtnClick (user) {
+    //   this.formLogin.username = user.username
+    //   this.formLogin.password = user.password
+    //   this.submit()
+    // },
     /**
      * @description 提交表单
      */
@@ -210,17 +180,9 @@ export default {
           // 注意 这里的演示没有传验证码
           // 具体需要传递的数据请自行修改代码
           if (this.formLogin.password.length >= 6) {
-            let newpassword = crypto
-              .createHmac('sha256', appkey.appkey)
-              .update(this.formLogin.password)
-              .digest('hex')
             this.login({
-              username: this.formLogin.username,
-              password: newpassword,
-              token: crypto
-                .createHmac('sha256', appkey.appkey)
-                .update(this.formLogin.username + newpassword)
-                .digest('hex')
+              user: this.formLogin.username,
+              password: this.formLogin.password
             })
               .then((res) => {
                 // 重定向对象不存在则返回顶层路径

@@ -4,7 +4,7 @@
     class="d2-source"
     :class="{ 'd2-source--active': isActive }"
     @click="handleClick">
-    <d2-icon name="code"/> Underdog工作室
+    <d2-icon name="code"/> freeRun
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
   methods: {
     // 点击按钮的时候跳转到源代码
     handleClick () {
-      this.$open(`https://www.baidu.com`)
+      this.$open(`https://github.com/9237074/freeRunAdmin`)
     }
   }
 }

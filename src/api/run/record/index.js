@@ -1,10 +1,9 @@
 import request from '@/plugin/axios'
-import { token } from '@/api/token.js'
 
-export function runRecord (data, status, offset) {
+export default function runRecord (data) {
   return request({
-    url: 'adminrunrecord?token=' + token + '&type=student' + '&status=' + status + '&offset=' + offset,
-    method: 'get',
+    url: '/admin/run/runrecord',
+    method: 'post',
     data
   })
 }

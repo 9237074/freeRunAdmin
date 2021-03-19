@@ -24,10 +24,10 @@
       <el-table-column prop="studentId" label="学号" width="110">
       </el-table-column>
       <el-table-column prop="name" label="姓名" width="110"> </el-table-column>
-      <el-table-column prop="gender" label="性别" width="110">
+      <!-- <el-table-column prop="gender" label="性别" width="110"> -->
       </el-table-column>
       <el-table-column prop="grade" label="年级" width="110"> </el-table-column>
-      <el-table-column prop="Department" label="院系" width="150">
+      <el-table-column prop="department" label="院系" width="150">
       </el-table-column>
       <el-table-column prop="profession" label="专业" width="200">
       </el-table-column>
@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import { conditionalQuery } from '@/api/conditionalQuery/conditionalQuery'
+import { conditionalQuery } from '@/api/conditionalQuery/conditionalQuery';
+import getStuData from '@api/admin/stuData';
 export default {
   name: 'stuData',
   data () {
@@ -61,45 +62,36 @@ export default {
           studentId: '',
           name: '',
           gender: '',
-          Department: '',
+          department: '',
           profession: '',
           grade: ''
         }
       ],
       length: null
-    }
+    };
   },
   mounted: function () {
-    this.search()
+    this.search();
   },
   methods: {
     reset () {
-      this.stuId = null
-      this.Department = null
+      this.stuId = null;
+      this.department = null;
     },
     search () {
-      let data = {}
-      data.startTime = '2000-01-01'
-      data.endTime = '2999-12-12'
-      data.page = this.page
-      data.table = 'students'
-      data.stuId = this.stuId
-      data.department = this.Department
-
-      conditionalQuery(data).then((res) => {
-        console.log(res)
-        this.tableData = res.data
-        this.length = res.length
-      })
+      getStuData().then((res) => {
+        this.tableData = res.data;
+        this.length = res.count;
+      });
     },
     currentChange (e) {
-      console.log('page:', e)
-      this.page = e - 1
-      console.log('page1:', this.page)
-      this.search()
+      console.log('page:', e);
+      this.page = e - 1;
+      console.log('page1:', this.page);
+      this.search();
     }
   }
-}
+};
 </script>
 <style>
 .partitionLine {

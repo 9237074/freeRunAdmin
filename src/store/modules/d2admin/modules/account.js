@@ -14,16 +14,14 @@ export default {
      * @param {Object} param route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
      */
     login ({ dispatch }, {
-      username = '',
-      password = '',
-      token
+      user = '',
+      password = ''
     } = {}) {
       return new Promise((resolve, reject) => {
         // 开始请求登录接口
         AccountLogin({
-          username,
-          password,
-          token
+          user,
+          password
         })
           .then(async res => {
             // 设置 cookie 一定要存 uuid 和 token 两个 cookie
@@ -31,8 +29,9 @@ export default {
             // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
             // token 代表用户当前登录状态 建议在网络请求中携带 token
             // 如有必要 token 需要定时更新，默认保存一天
+            console.log('aaa')
             if (res !== '账号或密码错误') {
-              util.cookies.set('uuid', res.uuid)
+              // util.cookies.set('uuid', res.uuid)
               util.cookies.set('token', res.token)
               // 设置 vuex 用户信息
               await dispatch('d2admin/user/set', {
